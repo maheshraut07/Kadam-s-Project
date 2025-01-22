@@ -10,16 +10,26 @@ const Navbar = () => {
         <div>
           <Link to="/">
             <h1 className="text-2xl font-bold">
-              kadam's<span className="text-[#14e35c]">Project</span>
+              <span  className="text-[#14e35c]">Grapes</span><span> Kart</span>
             </h1>
           </Link>
         </div>
+        <div className="flex items-center">
+            <ul className="flex font-medium items-center gap-16">
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/products">Products</Link></li>
+                <li><Link to="/browse">Browse</Link></li>
+                <li><Link to="/about">About us</Link></li>
+            </ul>
+        </div>
         <div className="flex items-center gap-2">
           <Link to="/login">
-            <Button variant="outline">Login</Button>
+            <Button variant="outline" className="bg-transparent hover:bg-[#14e35c]">Login</Button>
           </Link>
           <Link to="/signup">
-            <Button className="text-[#14e35c] bg-transparent hover:bg-[#5b30a6]">Signup</Button>
+            <Button variant="outline" className="bg-transparent hover:bg-[#14e35c]">
+              Signup
+            </Button>
           </Link>
         </div>
       </div>
