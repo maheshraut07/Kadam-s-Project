@@ -27,14 +27,7 @@ const itemSchema = new mongoose.Schema(
     },
     images: [
       {
-        url: {
-          type: String,
-          required: [true, "Image URL is required"],
-        },
-        alt: {
-          type: String,
-          default: "Item image",
-        },
+        type: String,
       },
     ],
     isAvailable: {
