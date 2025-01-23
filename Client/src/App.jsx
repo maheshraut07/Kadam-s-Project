@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import { Button } from "./components/ui/button";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { toast } from "./lib/utils";
+import Kart from "./pages/Kart";
 
 const appRouter = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const appRouter = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />,
+  },
+  {
+    path: "/kart",
+    element: <Kart />,
   },
 ]);
 
