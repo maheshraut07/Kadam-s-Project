@@ -12,16 +12,16 @@ export const registerUser = async (req, res, next) => {
       return res.status(400).json({ errors: errors.array().map((e) => e.msg) });
     }
 
-    const { name, mobile, password } = req.body;
+    const { name, mobile, email, password } = req.body;
 
-    const existingUser = await User.findOne({ mobile });
+    const existingUser = await User.findOne({ $or: [{ mobile }, { email }] });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = new User({ name, password: hashedPassword, mobile });
+    const user = new User({ name, password: hashedPassword, mobile, email });
     await user.save();
 
     res.status(201).json({ message: "User registered" });
@@ -47,7 +47,9 @@ export const loginUser = async (req, res, next) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "10d",
     });
-    res.status(200).json({ message: "Login success", token });
+
+    user.password = null;
+    res.status(200).json({ message: "Login success", token, user });
   } catch (error) {
     next(error);
   }
