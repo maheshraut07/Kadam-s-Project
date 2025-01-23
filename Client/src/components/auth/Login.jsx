@@ -4,8 +4,17 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Link, useNavigate } from "react-router-dom";
+import authApi from "@/api/modules/api.auth";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/functions/user";
+import Loader from "../ui/Loader";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [input, setInput] = useState({
     mobile: "",
@@ -18,8 +27,18 @@ const Login = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-}
-
+    setIsLoading(true);
+    const { response, error } = await authApi.login(input);
+    if (response) {
+      dispatch(setUser(response));
+      toast.success(response.message);
+      navigate("/");
+    }
+    if (error) {
+      toast.error(error.message);
+    }
+    setIsLoading(false);
+  };
 
   return (
     <div>
@@ -37,7 +56,7 @@ const Login = () => {
               value={input.mobile}
               name="mobile"
               onChange={changeEventHandler}
-              placeholder="8080808080"
+              placeholder="XXXXXXXXX"
             />
           </div>
 
@@ -54,7 +73,6 @@ const Login = () => {
           <Button type="submit" className="w-full my-4 ">
             Login
           </Button>
-
           <span className="text-sm">
             Don't have an account?{" "}
             <Link to="/signup" className="text-blue-600">
@@ -63,6 +81,7 @@ const Login = () => {
           </span>
         </form>
       </div>
+      <Loader loading={isLoading} />
     </div>
   );
 };
