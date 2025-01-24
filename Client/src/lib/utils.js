@@ -25,3 +25,25 @@ export const toast = {
     fontWeight: "normal",
   },
 };
+
+export const getNextSaturday = () => {
+  const today = new Date();
+  const dayIndex = today.getDay();
+
+  const daysToSaturday = (6 - dayIndex + 7) % 7 || 7;
+
+  const nextSaturday = new Date();
+  nextSaturday.setDate(today.getDate() + daysToSaturday);
+
+  return formatDate(nextSaturday);
+};
+
+export const formatDate = (date) => {
+  const options = {
+    weekday: "long",
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  };
+  return date.toLocaleDateString("en-US", options).replace(",", "");
+};
