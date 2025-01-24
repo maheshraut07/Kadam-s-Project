@@ -15,7 +15,7 @@ const Home = () => {
       const { response, error } = await itemsApi.getItems();
       if (response) {
         setItems(response.items);
-        console.log(response);
+        // console.log(response);
       }
       if (error) {
         toast.error(error.message);
@@ -26,7 +26,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className="text-[#3C3838]">
       <Navbar />
       <HeroSection />
       <Grapes items={items} />
