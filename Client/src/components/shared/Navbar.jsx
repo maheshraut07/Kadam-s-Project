@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const { user } = useSelector((store) => store.user);
+  const { items } = useSelector((store) => store.cart);
 
   return (
     <div className="bg-white">
@@ -34,7 +35,23 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
+<<<<<<< Updated upstream
         <div className="flex items-center gap-2">
+=======
+
+        {/* User Actions: Login/Signup or Welcome Message */}
+        <div className="flex items-center gap-4">
+          {/* Kart Icon */}
+          <Link to="/kart" className="relative">
+            <ShoppingCart className="h-6 w-6 text-gray-700 hover:text-[#14e35c] transition-colors" />
+            {/* Kart Item Badge */}
+            <div className="absolute -top-2 -right-2 bg-[#14e35c] text-white text-xs font-bold h-5 w-5 rounded-full flex items-center justify-center">
+              {items.length}
+            </div>
+          </Link>
+
+          {/* Conditional User Authentication */}
+>>>>>>> Stashed changes
           {user ? (
             <p>Welcome back!</p>
           ) : (

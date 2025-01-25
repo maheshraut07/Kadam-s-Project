@@ -54,3 +54,19 @@ export const loginUser = async (req, res, next) => {
     next(error);
   }
 };
+
+export const autoLogin = async (req, res, next) => {
+  try {
+    const { user } = req;
+    if (!user)
+      return res.status(505).json({
+        message: "Unauthorized",
+      });
+    return res.status(200).json({
+      user,
+    });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
