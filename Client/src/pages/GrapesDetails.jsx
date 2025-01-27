@@ -24,7 +24,7 @@ const GrapesDetails = () => {
 
   const handleBuyNow = () => {
     const message = `Hello, I want to buy "${item.name}" for ₹ ${item.price}. Please confirm the order.`;
-    const whatsappLink = `https://wa.me/${917083920080}?text=${encodeURIComponent(
+    const whatsappLink = `https://wa.me/${918600855864}?text=${encodeURIComponent(
       message
     )}`;
     window.open(whatsappLink, "_blank");
