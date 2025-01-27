@@ -8,12 +8,6 @@ const GrapesDetails = () => {
   const location = useLocation();
   const item = location.state;
 
-  const [selectedImage, setSelectedImage] = useState(item.images[0]);
-
-  const handleImageClick = (img) => {
-    setSelectedImage(img);
-  };
-
   if (!item) {
     return (
       <div className="flex items-center justify-center min-h-screen text-gray-700">
@@ -21,6 +15,20 @@ const GrapesDetails = () => {
       </div>
     );
   }
+
+  const [selectedImage, setSelectedImage] = useState(item.images[0]);
+
+  const handleImageClick = (img) => {
+    setSelectedImage(img);
+  };
+
+  const handleBuyNow = () => {
+    const message = `Hello, I want to buy "${item.name}" for ₹ ${item.price}. Please confirm the order.`;
+    const whatsappLink = `https://wa.me/${917083920080}?text=${encodeURIComponent(
+      message
+    )}`;
+    window.open(whatsappLink, "_blank");
+  };
 
   return (
     <div>
@@ -59,8 +67,11 @@ const GrapesDetails = () => {
               Delivery Expected by <b>{getNextSaturday()}</b>
             </p>
             <div className="mt-6 flex gap-4">
-              <Button className="bg-[#3C3838] text-white py-2 px-6 rounded hover:bg-black transition duration-200 w-1/2 mt-4">
-                Add to Cart
+              <Button
+                className="bg-[#3C3838] text-white py-2 px-6 rounded hover:bg-black transition duration-200 w-1/2 mt-4"
+                onClick={handleBuyNow}
+              >
+                Buy Now
               </Button>
             </div>
           </div>

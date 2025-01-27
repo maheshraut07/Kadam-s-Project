@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import { useSelector } from "react-redux";
-import { ShoppingCart } from "lucide-react"; // Import a cart icon from a popular icon library (lucide-react)
+import { ShoppingCart } from "lucide-react";
 
 const Navbar = () => {
   const { user } = useSelector((store) => store.user);
@@ -54,27 +54,24 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-
-        {/* User Actions: Login/Signup or Welcome Message */}
         <div className="flex items-center gap-4">
-          {/* Kart Icon */}
-          <Link to="/kart" className="relative">
+          {/* <Link to="/kart" className="relative">
             <ShoppingCart className="h-6 w-6 text-gray-700 hover:text-[#14e35c] transition-colors" />
-            {/* Kart Item Badge */}
             <div className="absolute -top-2 -right-2 bg-[#14e35c] text-white text-xs font-bold h-5 w-5 rounded-full flex items-center justify-center">
-              3 {/* Replace this hardcoded value with a dynamic value from Redux */}
+              {items.length}
             </div>
-          </Link>
+          </Link> 
+          */}
 
           {/* Conditional User Authentication */}
           {user ? (
-            <p className="text-gray-700">Welcome back!</p>
+            <p>Welcome back!</p>
           ) : (
             <>
               <Link to="/login">
                 <Button
                   variant="outline"
-                  className="bg-transparent hover:bg-[#14e35c] text-gray-700"
+                  className="bg-transparent hover:bg-[#14e35c]"
                 >
                   Login
                 </Button>
@@ -82,7 +79,7 @@ const Navbar = () => {
               <Link to="/signup">
                 <Button
                   variant="outline"
-                  className="bg-transparent hover:bg-[#14e35c] text-gray-700"
+                  className="bg-transparent hover:bg-[#14e35c]"
                 >
                   Signup
                 </Button>

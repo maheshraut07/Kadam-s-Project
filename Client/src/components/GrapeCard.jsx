@@ -1,8 +1,18 @@
+// import { addToCart } from "@/store/functions/cart";
 import React from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 const GrapeCard = ({ item }) => {
-  if (!item) return null;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // const handleAddToCart = (e) => {
+  //   e.stopPropagation();
+  //   e.preventDefault();
+  //   dispatch(addToCart({ ...item, quantity: 1 }));
+  //   navigate("/kart");
+  // };
 
   return (
     <Link to={`/details/${item._id}`} state={item}>
@@ -20,7 +30,7 @@ const GrapeCard = ({ item }) => {
           <p className="text-gray-700 mt-1">{item.description}</p>
           <p className="text-green-600 font-semibold mt-2">In Stock</p>
           <button className="mt-4 w-full bg-[#3C3838] text-white py-2 rounded hover:bg-black transition duration-200">
-            Add to Cart
+            Buy Now
           </button>
         </div>
       </div>
