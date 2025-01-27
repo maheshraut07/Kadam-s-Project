@@ -4,16 +4,6 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 const GrapeCard = ({ item }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  // const handleAddToCart = (e) => {
-  //   e.stopPropagation();
-  //   e.preventDefault();
-  //   dispatch(addToCart({ ...item, quantity: 1 }));
-  //   navigate("/kart");
-  // };
-
   return (
     <Link to={`/details/${item._id}`} state={item}>
       <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white">

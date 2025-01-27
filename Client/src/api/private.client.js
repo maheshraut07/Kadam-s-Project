@@ -3,14 +3,14 @@ import queryString from "query-string";
 
 const baseURL = import.meta.env.VITE_APP_BACKEND_URL;
 
-const publicClient = axios.create({
+const privateClient = axios.create({
   baseURL,
   paramsSerializer: {
     encode: (params) => queryString.stringify(params),
   },
 });
 
-publicClient.interceptors.request.use(async (config) => {
+privateClient.interceptors.request.use(async (config) => {
   return {
     ...config,
     headers: {
@@ -20,7 +20,7 @@ publicClient.interceptors.request.use(async (config) => {
   };
 });
 
-publicClient.interceptors.response.use(
+privateClient.interceptors.response.use(
   (response) => {
     if (response && response.data) return response.data;
     return response;
@@ -30,4 +30,4 @@ publicClient.interceptors.response.use(
   }
 );
 
-export default publicClient;
+export default privateClient;

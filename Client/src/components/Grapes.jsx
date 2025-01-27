@@ -11,7 +11,7 @@ const Grapes = ({ items }) => {
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-5">
         {items.map((item) => (
-          <GrapeCard item={item} />
+          <GrapeCard item={item} key={item._id} />
         ))}
       </div>
     </div>

@@ -6,6 +6,7 @@ import { ShoppingCart } from "lucide-react";
 
 const Navbar = () => {
   const { user } = useSelector((store) => store.user);
+  const { items } = useSelector((store) => store.cart);
 
   return (
     <div className="bg-white shadow-md">
@@ -55,14 +56,12 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="flex items-center gap-4">
-          {/* <Link to="/kart" className="relative">
+          <Link to="/kart" className="relative">
             <ShoppingCart className="h-6 w-6 text-gray-700 hover:text-[#14e35c] transition-colors" />
             <div className="absolute -top-2 -right-2 bg-[#14e35c] text-white text-xs font-bold h-5 w-5 rounded-full flex items-center justify-center">
               {items.length}
             </div>
-          </Link> 
-          */}
-
+          </Link>
           {/* Conditional User Authentication */}
           {user ? (
             <p>Welcome back!</p>

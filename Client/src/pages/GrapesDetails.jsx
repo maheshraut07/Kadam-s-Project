@@ -1,12 +1,17 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../components/shared/Navbar";
 import { Button } from "../components/ui/button";
 import { getNextSaturday, sendMessage } from "@/lib/utils";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/store/functions/cart";
 
 const GrapesDetails = () => {
   const location = useLocation();
   const item = location.state;
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   if (!item) {
     return (
@@ -18,17 +23,13 @@ const GrapesDetails = () => {
 
   const [selectedImage, setSelectedImage] = useState(item.images[0]);
 
-  const handleImageClick = (img) => {
-    setSelectedImage(img);
+  const handleBuyNow = (e) => {
+    dispatch(addToCart({ ...item, quantity: 1 }));
+    navigate("/kart");
   };
 
-  const handleBuyNow = () => {
-    // sendMessage();
-    const message = `Hello, I want to buy "${item.name}" for ₹ ${item.price}. Please confirm the order.`;
-    const whatsappLink = `https://wa.me/${918600855864}?text=${encodeURIComponent(
-      message
-    )}`;
-    window.open(whatsappLink, "_blank");
+  const handleImageClick = (img) => {
+    setSelectedImage(img);
   };
 
   return (
