@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "../components/shared/Navbar";
 import { Button } from "../components/ui/button";
-import { getNextSaturday } from "@/lib/utils";
+import { getNextSaturday, sendMessage } from "@/lib/utils";
 
 const GrapesDetails = () => {
   const location = useLocation();
@@ -23,11 +23,7 @@ const GrapesDetails = () => {
   };
 
   const handleBuyNow = () => {
-    const message = `Hello, I want to buy "${item.name}" for ₹ ${item.price}. Please confirm the order.`;
-    const whatsappLink = `https://wa.me/${917083920080}?text=${encodeURIComponent(
-      message
-    )}`;
-    window.open(whatsappLink, "_blank");
+    // sendMessage();
   };
 
   return (

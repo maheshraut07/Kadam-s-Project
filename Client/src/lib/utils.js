@@ -47,3 +47,11 @@ export const formatDate = (date) => {
   };
   return date.toLocaleDateString("en-US", options).replace(",", "");
 };
+
+export const sendMessage = () => {
+  const message = `Hello, I want to buy "${item.name}" for ₹ ${item.price}. Please confirm the order.`;
+  const whatsappLink = `https://wa.me/${918600855864}?text=${encodeURIComponent(
+    message
+  )}`;
+  window.open(whatsappLink, "_blank");
+};
