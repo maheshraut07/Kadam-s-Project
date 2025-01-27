@@ -6,6 +6,7 @@ import GrapesDetails from "./pages/GrapesDetails";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { toast } from "./lib/utils";
 import Kart from "./pages/Kart";
+import Checkout from "./pages/Checkout";
 
 const appRouter = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const appRouter = createBrowserRouter([
   {
     path: "/kart",
     element: <Kart />,
+  },
+  {
+    path: "/checkout",
+    element: <Checkout />,
   },
 ]);
 

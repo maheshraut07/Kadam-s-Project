@@ -37,9 +37,11 @@ const Kart = () => {
                 <p className="font-bold">Total</p>
                 <p className="font-bold">₹{totalPrice}</p>
               </div>
-              <Button className="w-full bg-green-600 text-white py-2 rounded-md">
-                Proceed to Checkout
-              </Button>
+              <Link to="/checkout">
+                <Button className="w-full bg-green-600 text-white py-2 rounded-md">
+                  Proceed to Checkout
+                </Button>
+              </Link>
             </div>
           </div>
         ) : (
