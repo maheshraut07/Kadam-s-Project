@@ -38,6 +38,18 @@ export const getNextSaturday = () => {
   return formatDate(nextSaturday);
 };
 
+export const getNextFriday = () => {
+  const today = new Date();
+  const dayIndex = today.getDay();
+
+  const daysToSaturday = (5 - dayIndex + 7) % 7 || 7;
+
+  const nextSaturday = new Date();
+  nextSaturday.setDate(today.getDate() + daysToSaturday);
+
+  return formatDate(nextSaturday);
+};
+
 export const formatDate = (date) => {
   const options = {
     weekday: "long",

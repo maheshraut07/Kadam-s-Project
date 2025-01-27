@@ -54,3 +54,12 @@ export const loginUser = async (req, res, next) => {
     next(error);
   }
 };
+
+export const autoLogin = async (req, res, next) => {
+  const { user } = req;
+  if (!user) {
+    res.status(403).json({ message: "Please login to continue" });
+  }
+  user.password = null;
+  return res.status(200).json({ user });
+};
