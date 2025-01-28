@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { toast } from "./lib/utils";
 import Kart from "./pages/Kart";
 import Checkout from "./pages/Checkout";
+import ClientProfile from "./pages/ClientProfile";
 
 const appRouter = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const appRouter = createBrowserRouter([
   {
     path: "/checkout",
     element: <Checkout />,
+  },
+  {
+    path: "/profile",
+    element: <ClientProfile />,
   },
 ]);
 

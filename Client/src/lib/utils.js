@@ -67,3 +67,10 @@ export const sendMessage = () => {
   )}`;
   window.open(whatsappLink, "_blank");
 };
+
+export const statusColors = {
+  Placed: "text-yellow-600",
+  Dispatched: "text-orange-600",
+  Delivered: "text-green-600",
+  Cancelled: "text-red-600",
+};

@@ -27,7 +27,6 @@ const Checkout = () => {
   };
 
   const handlePlaceOrder = async (e) => {
-    e.preventDefault();
     setLoading(true);
     // console.log({ items, totalPrice, deliveryCharge });
     const { response, error } = await ordersApi.placeOrder({
@@ -159,6 +158,7 @@ const Checkout = () => {
           {/* Footer */}
           <div className="w-full flex justify-end p-4 sticky bottom-0 bg-white shadow-md">
             <button
+              disabled={loading}
               onClick={handlePlaceOrder}
               className="w-[10rem] px-6 py-3 font-semibold bg-green-500 text-white rounded-sm hover:bg-green-600"
             >

@@ -12,9 +12,7 @@ const Navbar = () => {
   const { items } = useSelector((store) => store.cart);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const logoutHandler =() => {
-   
-  };
+  const logoutHandler = () => {};
 
   return (
     <div className="bg-white shadow-md">
@@ -93,50 +91,50 @@ const Navbar = () => {
           {/* Conditional User Authentication */}
           {user ? (
             <div className="flex justify-center items-center gap-3">
-            <Popover className="">
-              <PopoverTrigger asChild>
-                <Avatar className="cursor-pointer bg-[#14e35c] text-white flex items-center justify-center">
-                  {/* UserIcon centered in the Avatar */}
-                  <UserIcon className="h-6 w-6 text-white" />
-                </Avatar>
-              </PopoverTrigger>
-              <PopoverContent className="w-80">
-                <div>
-                  <div className="flex gap-2 space-y-2">
-                    <Avatar className="cursor-pointer bg-[#14e35c] text-white flex items-center justify-center">
-                      {/* UserIcon centered in the Avatar */}
-                      <UserIcon className="h-6 w-6 text-white" />
-                    </Avatar>
+              <Popover className="">
+                <PopoverTrigger asChild>
+                  <Avatar className="cursor-pointer bg-[#14e35c] text-white flex items-center justify-center">
+                    {/* UserIcon centered in the Avatar */}
+                    <UserIcon className="h-6 w-6 text-white" />
+                  </Avatar>
+                </PopoverTrigger>
+                <PopoverContent className="w-80">
+                  <div>
+                    <div className="flex gap-2 space-y-2 items-center">
+                      <Avatar className="cursor-pointer bg-[#14e35c] text-white flex items-center justify-center">
+                        {/* UserIcon centered in the Avatar */}
+                        <UserIcon className="h-6 w-6 text-white" />
+                      </Avatar>
 
-                    <div>
-                      <h4 className="font-medium">
-                        {user?.name || "Guest User"}
-                      </h4>
-                      <p className="text-sm text-muted-foreground">
-                        {user?.profile?.bio || "Welcome to Grapes Kart!"}
-                      </p>
+                      <div>
+                        <h4 className="font-medium">
+                          {user?.name || "Guest User"}
+                        </h4>
+                        <p className="text-sm text-muted-foreground">
+                          {user?.profile?.bio || "Welcome to Grapes Kart!"}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex flex-col my-2 text-gray-600">
-                    {user && (
+                    <div className="flex flex-col my-2 text-gray-600">
+                      {user && (
+                        <div className="flex w-fit items-center gap-2 cursor-pointer">
+                          <User2 />
+                          <Button variant="link">
+                            <Link to="/profile">View Profile</Link>
+                          </Button>
+                        </div>
+                      )}
                       <div className="flex w-fit items-center gap-2 cursor-pointer">
-                        <User2 />
-                        <Button variant="link">
-                          <Link to="/profile">View Profile</Link>
+                        <LogOut />
+                        <Button onClick={logoutHandler} variant="link">
+                          Logout
                         </Button>
                       </div>
-                    )}
-                    <div className="flex w-fit items-center gap-2 cursor-pointer">
-                      <LogOut />
-                      <Button onClick={logoutHandler} variant="link">
-                        Logout
-                      </Button>
                     </div>
                   </div>
-                </div>
-              </PopoverContent>
-            </Popover>
-            <span>{user?.name}</span>
+                </PopoverContent>
+              </Popover>
+              <span>{user?.name}</span>
             </div>
           ) : (
             <div className="hidden lg:flex gap-4">

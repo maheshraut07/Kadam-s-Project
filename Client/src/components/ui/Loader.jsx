@@ -8,6 +8,7 @@ const Loader = ({ loading }) => {
       color="#14E35C"
       cssOverride={{
         position: "fixed",
+        zIndex: 100,
         top: "60%",
         right: "50%",
         translate: "50% 0",

@@ -91,3 +91,15 @@ export const placeOrder = async (req, res, next) => {
     next(error, req, res);
   }
 };
+
+export const getOrders = async (req, res, next) => {
+  const { _id } = req.user;
+
+  try {
+    const orders = await Order.find({ user: _id }).populate("items");
+    return res.status(200).json({ orders });
+  } catch (error) {
+    console.log(error);
+    next(error, req, res);
+  }
+};
