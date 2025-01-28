@@ -1,17 +1,24 @@
+import ordersApi from "@/api/modules/api.order";
 import AddressForm from "@/components/AddressForm";
 import CartItem from "@/components/CartItem";
 import Navbar from "@/components/shared/Navbar";
+import Loader from "@/components/ui/Loader";
+import { clearCart } from "@/store/functions/cart";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Checkout = () => {
   const { user } = useSelector((store) => store.user);
   const { items, totalPrice, deliveryCharge } = useSelector(
     (store) => store.cart
   );
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(false);
   const [showAddressForm, setShowAddressForm] = useState(false);
   const [paymentMode, setPaymentMode] = useState("cod");
 
@@ -19,18 +26,35 @@ const Checkout = () => {
     setShowAddressForm(true);
   };
 
-  const handlePlaceOrder = () => {
-    alert("Order placed successfully! Thank you for shopping with us.");
-    navigate("/");
+  const handlePlaceOrder = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    // console.log({ items, totalPrice, deliveryCharge });
+    const { response, error } = await ordersApi.placeOrder({
+      items,
+      totalPrice,
+      deliveryCharge,
+    });
+    if (response) {
+      toast.success(response.message);
+      dispatch(clearCart());
+      navigate("/");
+    }
+    if (error) {
+      toast.error(error.message);
+    }
+    setLoading(false);
   };
 
   return (
     user && (
       <>
+        <Loader loading={loading} />
         <Navbar />
         <div className="max-w-[950px] w-full relative pb-8 mx-auto shadow-md rounded-md mt-6 ">
+          {/* Address */}
           <div>
-            <h2 className="text-lg p-4 bg-green-500 text-white font-semibold">
+            <h2 className="text-lg p-4 bg-gray-600 text-white font-semibold">
               Shipping Address
             </h2>
             {showAddressForm ? (
@@ -79,7 +103,7 @@ const Checkout = () => {
           </div>
 
           <div>
-            <h2 className="text-lg p-4 bg-green-500 text-white font-semibold">
+            <h2 className="text-lg p-4 bg-gray-600 text-white font-semibold">
               Payment Details
             </h2>
             <div className="py-2 px-4">
@@ -99,8 +123,9 @@ const Checkout = () => {
             </div>
           </div>
 
-          <div className="mb-12">
-            <h2 className="text-lg p-4 bg-green-500  text-white font-semibold">
+          {/* Payment */}
+          <div className="mb-10">
+            <h2 className="text-lg p-4 bg-gray-600  text-white font-semibold">
               Order Summary
             </h2>
             <div className="mt-4 bg-white p-4 gap-4 rounded shadow-sm flex max-h-[40vh] overflow-y-scroll hide-scrollbar">
@@ -131,12 +156,13 @@ const Checkout = () => {
             </div>
           </div>
 
+          {/* Footer */}
           <div className="w-full flex justify-end p-4 sticky bottom-0 bg-white shadow-md">
             <button
               onClick={handlePlaceOrder}
-              className="px-5 py-2 bg-gray-600 text-white rounded-sm hover:bg-black"
+              className="w-[10rem] px-6 py-3 font-semibold bg-green-500 text-white rounded-sm hover:bg-green-600"
             >
-              Proceed to Place Order
+              PLACE ORDER
             </button>
           </div>
         </div>
