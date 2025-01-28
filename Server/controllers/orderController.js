@@ -72,7 +72,7 @@ export const placeOrder = async (req, res, next) => {
     } - ${user.address.pincode}`;
 
     await sendEmail(
-      "patilritesh712003@gmail.com",
+      user.email,
       "Order Confirmation",
       `Dear ${user.name},\nYour order worth ₹${
         totalPrice + deliveryCharge
