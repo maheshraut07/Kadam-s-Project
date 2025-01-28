@@ -1,8 +1,11 @@
-import { createSlice, configureStore } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+
+const today = new Date();
 
 const initialState = {
   items: [],
   totalPrice: 0,
+  deliveryCharge: today.getDay() <= 5 ? 0 : 50,
 };
 
 const cartSlice = createSlice({
@@ -24,7 +27,7 @@ const cartSlice = createSlice({
       const itemId = action.payload;
       const existingItem = state.items.find((item) => item._id === itemId);
       if (existingItem) {
-        state.totalPrice -= existingItem.price;
+        state.totalPrice -= existingItem.price * existingItem.quantity;
         state.items = state.items.filter((item) => item._id !== itemId);
       }
     },
