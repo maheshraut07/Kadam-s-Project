@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import { useDispatch } from "react-redux";
 import { removeFromCart, updateQuantity } from "@/store/functions/cart";
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, checkoutPage }) => {
   const dispatch = useDispatch();
 
   const handleChangeQuantity = (operation) => {
@@ -21,7 +21,11 @@ const CartItem = ({ item }) => {
   };
 
   return (
-    <div className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg shadow-lg mb-4 bg-white hover:shadow-xl transition-shadow duration-300">
+    <div
+      className={`flex items-center gap-4 p-4 border border-gray-200 rounded-lg ${
+        !checkoutPage && "shadow-lg hover:shadow-lg"
+      } mb-4 bg-white  transition-shadow duration-300`}
+    >
       <img
         src={item.images[0]}
         alt={item.name}
@@ -48,13 +52,14 @@ const CartItem = ({ item }) => {
           >
             +
           </button>
-
-          <Button
-            className="ml-4 px-3 py-2 text-red-600 bg-red-100 rounded-md hover:bg-red-200 transition duration-200"
-            onClick={handleRemoveItem}
-          >
-            Remove
-          </Button>
+          {!checkoutPage && (
+            <Button
+              className="ml-4 px-3 py-2 text-red-600 bg-red-100 rounded-md hover:bg-red-200 transition duration-200"
+              onClick={handleRemoveItem}
+            >
+              Remove
+            </Button>
+          )}
         </div>
       </div>
 

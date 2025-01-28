@@ -44,7 +44,7 @@ const AddressForm = ({ user, setShowAddressForm }) => {
   };
 
   return (
-    <form onSubmit={handleSaveAddress} className="w-full px-6 rounded-lg mt-2">
+    <form onSubmit={handleSaveAddress} className="w-full px-6 rounded-lg my-2">
       <h1 className="text-md font-semibold mb-6">Edit Address</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>

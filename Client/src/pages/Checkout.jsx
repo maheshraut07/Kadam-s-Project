@@ -7,7 +7,9 @@ import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const { user } = useSelector((store) => store.user);
-  const { items, totalPrice } = useSelector((store) => store.cart);
+  const { items, totalPrice, deliveryCharge } = useSelector(
+    (store) => store.cart
+  );
   const navigate = useNavigate();
 
   const [showAddressForm, setShowAddressForm] = useState(false);
@@ -26,7 +28,7 @@ const Checkout = () => {
     user && (
       <>
         <Navbar />
-        <div className="max-w-4xl mx-auto shadow-md rounded-lg mt-6">
+        <div className="max-w-[950px] w-full relative pb-8 mx-auto shadow-md rounded-md mt-6 ">
           <div>
             <h2 className="text-lg p-4 bg-green-500 text-white font-semibold">
               Shipping Address
@@ -97,28 +99,46 @@ const Checkout = () => {
             </div>
           </div>
 
-          <div>
-            <h2 className="text-lg p-4 bg-green-500 text-white font-semibold">
+          <div className="mb-12">
+            <h2 className="text-lg p-4 bg-green-500  text-white font-semibold">
               Order Summary
             </h2>
-            <div className="mt-4 bg-white p-4 rounded shadow-sm">
-              {items.map((item) => (
-                <CartItem item={item} key={item._id} />
-              ))}
-              <hr className="my-2" />
-              <div className="flex justify-between font-bold">
-                <p>Total Price:</p>
-                <p>₹{totalPrice}</p>
+            <div className="mt-4 bg-white p-4 gap-4 rounded shadow-sm flex max-h-[40vh] overflow-y-scroll hide-scrollbar">
+              <div className="w-[70%]">
+                {items.map((item) => (
+                  <CartItem item={item} key={item._id} checkoutPage />
+                ))}
+              </div>
+              <div className="w-[30%]">
+                <p className="text-lg font-semibold text-gray-600">
+                  PRICE DETAILS
+                </p>
+                <ul className="border-y-[1px] w-full my-2">
+                  <li className="flex py-2 justify-between">
+                    <p>Price: </p> <p>₹ {totalPrice}</p>
+                  </li>
+                  <li className="flex py-2 justify-between">
+                    <p>Delivery Charges: </p> <p>₹ {deliveryCharge}</p>
+                  </li>
+                  <b>
+                    <li className="flex py-2 justify-between border-y-[1px]">
+                      <p>Total amount:</p>
+                      <p>₹ {totalPrice + deliveryCharge}</p>
+                    </li>
+                  </b>
+                </ul>
               </div>
             </div>
           </div>
 
-          <button
-            onClick={handlePlaceOrder}
-            className="w-full px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-700"
-          >
-            Proceed to Place Order
-          </button>
+          <div className="w-full flex justify-end p-4 sticky bottom-0 bg-white shadow-md">
+            <button
+              onClick={handlePlaceOrder}
+              className="px-5 py-2 bg-gray-600 text-white rounded-sm hover:bg-black"
+            >
+              Proceed to Place Order
+            </button>
+          </div>
         </div>
       </>
     )

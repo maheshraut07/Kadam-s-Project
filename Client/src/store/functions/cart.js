@@ -1,8 +1,11 @@
-import { createSlice, configureStore } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+
+const today = new Date();
 
 const initialState = {
   items: [],
   totalPrice: 0,
+  deliveryCharge: today.getDay() <= 5 ? 0 : 50,
 };
 
 const cartSlice = createSlice({
