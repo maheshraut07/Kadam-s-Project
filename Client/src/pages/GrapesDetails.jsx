@@ -24,8 +24,16 @@ const GrapesDetails = () => {
   const [selectedImage, setSelectedImage] = useState(item.images[0]);
 
   const handleBuyNow = (e) => {
-    dispatch(addToCart({ ...item, quantity: 1 }));
-    navigate("/kart");
+    // dispatch(addToCart({ ...item, quantity: 1 }));
+    // navigate("/kart");
+    const adminNumber = "918600855864";
+    const defaultMessage = "Hello, I want to buy this product!";
+
+    const url = `https://wa.me/${adminNumber}?text=${encodeURIComponent(
+      defaultMessage
+    )}`;
+
+    window.open(url, "_blank");
   };
 
   const handleImageClick = (img) => {
